@@ -3,9 +3,13 @@ import time
 import glob
 
 def get_latest_log() -> str:
-    # Path to the task logs directory
-    log_dir = r"C:\Users\Hitori US\.gemini\antigravity-ide\brain\c73e5be9-b238-410e-a36e-b7771363e632\.system_generated\tasks"
-    log_files = glob.glob(os.path.join(log_dir, "*.log"))
+    # Default to local cot_brain_debug.log if it exists
+    default_log = "cot_brain_debug.log"
+    if os.path.exists(default_log):
+        return default_log
+    
+    # Or find any other log file in the current directory
+    log_files = glob.glob("*.log")
     if not log_files:
         return None
     # Sort by modification time to find the newest one

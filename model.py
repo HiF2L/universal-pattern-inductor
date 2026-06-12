@@ -219,8 +219,8 @@ class IQMicroUnit(nn.Module):
         
         # 5. Inject positional embeddings sequence-length agnostically
         pos_ctx = self.pos_embedding[:, :T_ctx, :]
-        pos_qry = self.pos_embedding[:, 4:5, :]
-        pos_prog = self.pos_embedding[:, 5:5+S, :]
+        pos_qry = self.pos_embedding[:, T_ctx : T_ctx + 1, :]
+        pos_prog = self.pos_embedding[:, T_ctx + 1 : T_ctx + 1 + S, :]
         pos = torch.cat([pos_ctx, pos_qry, pos_prog], dim=1)
         seq = seq + pos
         
@@ -234,7 +234,7 @@ class IQMicroUnit(nn.Module):
         out_seq = self.core_transformer(seq, mask=mask)
         
         # 8. Extract program slot outputs to classify the next token
-        prog_out = out_seq[:, T_ctx : T_ctx + S, :] # [B, S, 256]
+        prog_out = out_seq[:, T_ctx + 1 : T_ctx + 1 + S, :] # [B, S, 256]
         logits = self.universal_decoder(prog_out)   # [B, S, 26]
         
         return logits

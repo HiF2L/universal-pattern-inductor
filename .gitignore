@@ -1,0 +1,14 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE environments and workspace configurations
+.idea/
+.vscode/
+.gemini/
+*.swp
+*.swo
+
+# Local logs (unless explicitly added)
+*.log

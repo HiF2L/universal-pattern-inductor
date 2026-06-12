@@ -34,7 +34,7 @@ OP_NAMES = {
 }
 
 class CoTLogger:
-    def __init__(self, filepath: str = r"c:\Users\Hitori US\Desktop\Dev\Intellegence bit\cot_brain_debug.log"):
+    def __init__(self, filepath: str = "cot_brain_debug.log"):
         self.filepath = filepath
         # Clear or initialize log file
         with open(self.filepath, "w", encoding="utf-8") as f:
